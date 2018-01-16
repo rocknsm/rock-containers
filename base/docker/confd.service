@@ -1,0 +1,13 @@
+[Unit]
+Description=Lightweight configuration management tool
+
+[Service]
+Type=oneshot
+EnvironmentFile=/run/metadata/environ
+ExecStart=/usr/bin/confd -onetime -backend env
+RemainAfterExit=true
+StandardOutput=journal
+
+[Install]
+WantedBy=basic.target
+After=rocknsm-metadata.service
