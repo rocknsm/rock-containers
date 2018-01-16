@@ -3,9 +3,10 @@
 FROM rocknsm/base
 MAINTAINER Derek Ditch <derek@rocknsm.io>
 
-LABEL io.rocknsm.zookeeper="0.0.1"
+LABEL io.rocknsm.zookeeper="0.0.2"
 
 ENV ROCKNSM_ZOOKEEPER_USER=zookeeper \
+    ROCKNSM_ZOOKEEPER_MYID=1 \
     ROCKNSM_ZOOKEEPER_CONFDIR=/etc/zookeeper \
     ROCKNSM_ZOOKEEPER_DATADIR=/var/lib/zookeeper/data \
     ROCKNSM_ZOOKEEPER_DATALOGDIR=/var/lib/zookeeper/logs \
