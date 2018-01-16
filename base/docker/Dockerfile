@@ -2,7 +2,7 @@ FROM centos/systemd
 MAINTAINER Derek Ditch <derek@rocknsm.io>
 
 LABEL io.rocknsm.platform="3.0.0"
-LABEL io.rocknsm.base="0.0.5"
+LABEL io.rocknsm.base="0.0.6"
 
 ENV container docker
 STOPSIGNAL SIGRTMIN+3
@@ -17,7 +17,7 @@ COPY confd.service /usr/lib/systemd/system/
 # Add confd as a standard way to render configs
 RUN yum -y update; yum install -y confd; \
     mkdir -p /etc/confd/{conf.d,templates}; \
-    chmod 0755 /usr/local/sbin/rocknsm-metadata.sh \
+    chmod 0755 /usr/local/sbin/rocknsm-metadata.sh; \
     rm -rf /var/cache/yum/*; systemctl enable rocknsm-metadata confd
 
 # Start systemd
