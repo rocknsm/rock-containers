@@ -1,11 +1,5 @@
 # The number of milliseconds of each tick
 tickTime={{ getv "/rocknsm/zookeeper/ticktime" }}
-# The number of ticks that the initial
-# synchronization phase can take
-initLimit={{ getv "/rocknsm/zookeeper/initlimit" }}
-# The number of ticks that can pass between
-# sending a request and getting an acknowledgement
-syncLimit={{ getv "/rocknsm/zookeeper/synclimit" }}
 # the directory where the snapshot is stored.
 dataDir={{ getv "/rocknsm/zookeeper/datadir" }}
 # the directory where transaction logs are stored
@@ -16,7 +10,19 @@ clientPort={{ getv "/rocknsm/zookeeper/port" }}
 # increase this if you need to handle more clients
 maxClientCnxns={{ getv "/rocknsm/zookeeper/maxclientcnxns" }}
 
+{{ with $servers := split (getv "/rocknsm/zookeeper/servers") " " }}
+{{ if gt ($servers | len) 1 -}}
+
+# The number of ticks that the initial
+# synchronization phase can take
+initLimit={{ getv "/rocknsm/zookeeper/initlimit" }}
+# The number of ticks that can pass between
+# sending a request and getting an acknowledgement
+syncLimit={{ getv "/rocknsm/zookeeper/synclimit" }}
 # List the servers
-{{ range split (getv "/rocknsm/zookeeper/servers") " " }}
+{{- range $servers  }}
 {{ . }}
-{{ end }}
+{{- end -}}{{/* end range */}}
+{{- end -}}{{/* end if */}}
+{{- end -}}{{/* end with */}}
+
