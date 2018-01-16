@@ -1,0 +1,10 @@
+[template]
+src   = "zoo.cfg.tmpl"
+dest  = "/etc/zookeeper/zoo.cfg"
+owner = "root"
+group = "root"
+mode  = "0644"
+
+keys = [
+ "/rocknsm/zookeeper",
+]

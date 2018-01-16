@@ -1,0 +1,22 @@
+# The number of milliseconds of each tick
+tickTime={{ getv "/rocknsm/zookeeper/ticktime" }}
+# The number of ticks that the initial
+# synchronization phase can take
+initLimit={{ getv "/rocknsm/zookeeper/initlimit" }}
+# The number of ticks that can pass between
+# sending a request and getting an acknowledgement
+syncLimit={{ getv "/rocknsm/zookeeper/synclimit" }}
+# the directory where the snapshot is stored.
+dataDir={{ getv "/rocknsm/zookeeper/datadir" }}
+# the directory where transaction logs are stored
+dataLogDir={{ getv "/rocknsm/zookeeper/datalogdir" }}
+# the port at which the clients will connect
+clientPort={{ getv "/rocknsm/zookeeper/port" }}
+# the maximum number of client connections.
+# increase this if you need to handle more clients
+maxClientCnxns={{ getv "/rocknsm/zookeeper/max_client_cnxns" }}
+
+# List the servers
+{{ range split (getv "/rocknsm/zookeeper/servers") " " }}
+{{ . }}
+{{ end }}

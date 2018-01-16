@@ -1,0 +1,10 @@
+[template]
+src   = "zoo_myid.tmpl"
+dest  = "/var/lib/zookeeper/data/myid"
+owner = "root"
+group = "root"
+mode  = "0644"
+
+keys = [
+ "/rocknsm/zookeeper",
+]
