@@ -1,9 +1,9 @@
 # Dockerfile for Zookeeper
 
-FROM rocknsm/base
+FROM rocknsm/base:latest
 MAINTAINER Derek Ditch <derek@rocknsm.io>
 
-LABEL io.rocknsm.zookeeper="0.0.2"
+LABEL io.rocknsm.zookeeper="0.0.3"
 
 ENV ROCKNSM_ZOOKEEPER_USER=zookeeper \
     ROCKNSM_ZOOKEEPER_MYID=1 \
