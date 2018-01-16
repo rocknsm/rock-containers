@@ -1,5 +1,7 @@
 [Unit]
 Description=Lightweight configuration management tool
+Requires=rocknsm-metadata.service
+After=rocknsm-metadata.service
 
 [Service]
 Type=oneshot
@@ -10,5 +12,4 @@ StandardOutput=journal
 
 [Install]
 WantedBy=basic.target
-Requires=rocknsm-metadata.service
-After=rocknsm-metadata.service
+
