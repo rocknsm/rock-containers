@@ -3,7 +3,7 @@
 FROM rocknsm/base:latest
 MAINTAINER Derek Ditch <derek@rocknsm.io>
 
-LABEL io.rocknsm.zookeeper="0.0.4"
+LABEL io.rocknsm.zookeeper="0.0.5"
 
 ENV ROCKNSM_ZOOKEEPER_USER=zookeeper \
     ROCKNSM_ZOOKEEPER_MYID=1 \
@@ -22,8 +22,7 @@ RUN yum update -y; \
   yum install -y zookeeper java-1.8.0-openjdk-headless; \
   rm -rf /var/cache/yum/*; \
   mkdir -p "$ROCKNSM_ZOOKEEPER_DATADIR" \
-           "$ROCKNSM_ZOOKEEPER_DATALOGDIR" \
-           /etc/systemd/system/zookeeper.service.d; \
+           "$ROCKNSM_ZOOKEEPER_DATALOGDIR"; \
   chown -R "$ROCKNSM_ZOOKEEPER_USER:$ROCKNSM_ZOOKEEPER_USER" \
            "$ROCKNSM_ZOOKEEPER_DATADIR" \
            "$ROCKNSM_ZOOKEEPER_DATALOGDIR"; \
@@ -35,8 +34,6 @@ COPY zoo_myid.toml /etc/confd/conf.d/
 COPY zoo.cfg.tmpl /etc/confd/templates/
 COPY zoo_myid.tmpl /etc/confd/templates/
 
-# Ensure zookeeper runs after confd
-COPY zookeeper.service.override /etc/systemd/system/zookeeper.service.d/override.conf
 
 # Expose data dirs
 VOLUME ["$ROCKNSM_ZOOKEEPER_DATADIR", "$ROCKNSM_ZOOKEEPER_DATALOGDIR"] 
