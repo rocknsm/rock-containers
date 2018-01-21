@@ -10,7 +10,8 @@ STOPSIGNAL SIGRTMIN+3
 COPY rocknsm-2.1.repo /etc/yum.repos.d/rocknsm-2.1.repo
 
 # Add confd as a standard way to render configs
-RUN yum -y update; yum install -y confd epel-release; \
+RUN yum -y install epel-release; yum -y update; \
+    yum install -y confd; \
     mkdir -p /etc/confd/{conf.d,templates}; \
     rm -rf /var/cache/yum/*; 
 
