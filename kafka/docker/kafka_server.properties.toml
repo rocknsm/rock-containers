@@ -1,0 +1,10 @@
+[template]
+src   = "kafka_server.properties.tmpl"
+dest  = "/etc/kafka/server.properties"
+owner = "root"
+group = "root"
+mode  = "0644"
+
+keys = [
+ "/kafka",
+]
