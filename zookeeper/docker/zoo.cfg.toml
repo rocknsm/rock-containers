@@ -6,5 +6,5 @@ group = "root"
 mode  = "0644"
 
 keys = [
- "/rocknsm/zookeeper",
+ "/zookeeper",
 ]

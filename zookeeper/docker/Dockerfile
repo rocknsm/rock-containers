@@ -3,29 +3,29 @@
 FROM rocknsm/base:latest
 MAINTAINER Derek Ditch <derek@rocknsm.io>
 
-LABEL io.rocknsm.zookeeper="0.0.5"
+LABEL io.rocknsm.zookeeper="0.0.6"
 
-ENV ROCKNSM_ZOOKEEPER_USER=zookeeper \
-    ROCKNSM_ZOOKEEPER_MYID=1 \
-    ROCKNSM_ZOOKEEPER_CONFDIR=/etc/zookeeper \
-    ROCKNSM_ZOOKEEPER_DATADIR=/var/lib/zookeeper/data \
-    ROCKNSM_ZOOKEEPER_DATALOGDIR=/var/lib/zookeeper/logs \
-    ROCKNSM_ZOOKEEPER_PORT=2181 \
-    ROCKNSM_ZOOKEEPER_TICKTIME=2000 \
-    ROCKNSM_ZOOKEEPER_INITLIMIT=10 \
-    ROCKNSM_ZOOKEEPER_SYNCLIMIT=5 \
-    ROCKNSM_ZOOKEEPER_MAXCLIENTCNXNS=60 \
-    ROCKNSM_ZOOKEEPER_SERVERS=server.1=0.0.0.0:2888:3888
+ENV ZOOKEEPER_USER=zookeeper \
+    ZOOKEEPER_MYID=1 \
+    ZOOKEEPER_CONFDIR=/etc/zookeeper \
+    ZOOKEEPER_DATADIR=/var/lib/zookeeper/data \
+    ZOOKEEPER_DATALOGDIR=/var/lib/zookeeper/logs \
+    ZOOKEEPER_PORT=2181 \
+    ZOOKEEPER_TICKTIME=2000 \
+    ZOOKEEPER_INITLIMIT=10 \
+    ZOOKEEPER_SYNCLIMIT=5 \
+    ZOOKEEPER_MAXCLIENTCNXNS=60 \
+    ZOOKEEPER_SERVERS=server.1=0.0.0.0:2888:3888
 
 # Prepare the environment and get things up to date
 RUN yum update -y; \
   yum install -y zookeeper java-1.8.0-openjdk-headless; \
   rm -rf /var/cache/yum/*; \
-  mkdir -p "$ROCKNSM_ZOOKEEPER_DATADIR" \
-           "$ROCKNSM_ZOOKEEPER_DATALOGDIR"; \
-  chown -R "$ROCKNSM_ZOOKEEPER_USER:$ROCKNSM_ZOOKEEPER_USER" \
-           "$ROCKNSM_ZOOKEEPER_DATADIR" \
-           "$ROCKNSM_ZOOKEEPER_DATALOGDIR"; \
+  mkdir -p "$ZOOKEEPER_DATADIR" \
+           "$ZOOKEEPER_DATALOGDIR"; \
+  chown -R "$ZOOKEEPER_USER:$ZOOKEEPER_USER" \
+           "$ZOOKEEPER_DATADIR" \
+           "$ZOOKEEPER_DATALOGDIR"; \
   systemctl enable zookeeper;
 
 # Add configuration templates
@@ -36,8 +36,8 @@ COPY zoo_myid.tmpl /etc/confd/templates/
 
 
 # Expose data dirs
-VOLUME ["$ROCKNSM_ZOOKEEPER_DATADIR", "$ROCKNSM_ZOOKEEPER_DATALOGDIR"] 
-EXPOSE $ROCKNSM_ZOOKEEPER_PORT 2888 3888
+VOLUME ["$ZOOKEEPER_DATADIR", "$ZOOKEEPER_DATALOGDIR"] 
+EXPOSE $ZOOKEEPER_PORT 2888 3888
 
 # systemd starts by default (from parent)
 
