@@ -1,0 +1,10 @@
+[template]
+src   = "bro_node.cfg.tmpl"
+dest  = "/etc/bro/node.cfg"
+owner = "root"
+group = "root"
+mode  = "0644"
+
+keys = [
+ "/bro",
+]
