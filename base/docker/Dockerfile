@@ -2,7 +2,7 @@ FROM centos/systemd
 MAINTAINER Derek Ditch <derek@rocknsm.io>
 
 LABEL io.rocknsm.platform="3.0.0"
-LABEL io.rocknsm.base="0.0.9-20180128"
+LABEL io.rocknsm.base="0.0.9-20180216"
 
 ENV container docker
 STOPSIGNAL SIGRTMIN+3
