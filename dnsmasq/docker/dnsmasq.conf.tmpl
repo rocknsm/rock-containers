@@ -1,10 +1,12 @@
 {{$basePath := "/dns/services"}}
 
+{{$tld := "local"}}
 {{if exists "/dns/domain"}}
 {{$tld := getv "/dns/domain"}}
 domain={{$tld}}
-local=/local/
 {{end}}
+
+local=/local/
 
 keep-in-foreground
 domain-needed
