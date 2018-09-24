@@ -4,15 +4,15 @@ MAINTAINER Derek Ditch <derek@rocknsm.io>
 LABEL io.rocknsm.platform="3.0.0"
 LABEL io.rocknsm.base="0.0.10-20180923"
 
-ENV container docker
 STOPSIGNAL SIGRTMIN+3
 
+ENV ETCD_LISTEN_CLIENT_URL="http://etcd:2379"
 
 # Add confd as a standard way to render configs
-RUN dnf -y update; \
-    dnf install -y confd; \
+RUN dnf -y -setopt=tsflags=nodocs update; \
+    dnf install -y -setopt=tsflags=nodocs  confd; \
     mkdir -p /etc/confd/{conf.d,templates}; \
-    rm -rf /var/cache/yum/*; \
+    rm -rf /var/cache/dnf/*; \
     systemctl mask sys-fs-fuse-connections.mount
 
 COPY rocknsm-metadata.sh /usr/local/sbin/
@@ -26,4 +26,3 @@ RUN systemctl enable rocknsm-metadata confd; \
 
 # Start systemd
 CMD ["/usr/sbin/init"]
-
