@@ -1,6 +1,6 @@
 # Dockerfile for dnsmasq
 
-FROM rocknsm/base:latest
+FROM quay.io/rocknsm/base:latest
 MAINTAINER Derek Ditch <derek@rocknsm.io>
 
 LABEL io.rocknsm.dnsmasq="2.79-20180923"
@@ -10,7 +10,8 @@ RUN dnf install -y --setopt=tsflags=nodocs dnsmasq; \
   rm -rf /var/cache/dnf/*; \
   systemctl enable dnsmasq;
 
-COPY dnsmasq_confd.conf /etc/dnsmasq.d/confd.conf
+COPY dnsmasq.conf.tmpl /etc/confd/templates/
+COPY dnsmasq.toml /etc/confd/conf.d/
 
 # Expose ports
 EXPOSE 53/udp
