@@ -6,4 +6,3 @@ keys = [
 ]
 check_cmd = "/usr/sbin/dnsmasq --test -C {{.src}}"
 reload_cmd = "echo \"Restarting dnsmasq\" && /usr/bin/systemctl restart dnsmasq"
-
