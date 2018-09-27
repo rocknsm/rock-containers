@@ -17,7 +17,7 @@ COPY dnsmasq.conf.tmpl /etc/confd/templates/
 COPY dnsmasq.toml /etc/confd/conf.d/
 
 # Expose ports
-EXPOSE 5353/udp
-EXPOSE 5353/tcp
+EXPOSE 53/udp
+EXPOSE 53/tcp
 
 # systemd starts by default (from parent)
