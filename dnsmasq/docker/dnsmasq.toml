@@ -1,0 +1,9 @@
+[template]
+src="dnsmasq.conf.tmpl"
+dest="/etc/dnsmasq.d/confd.conf"
+keys = [
+	"/dns"
+]
+check_cmd = "/usr/sbin/dnsmasq --test -C {{.src}}"
+reload_cmd = "echo \"Restarting dnsmasq\" && /usr/bin/systemctl restart dnsmasq"
+

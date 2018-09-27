@@ -1,0 +1,36 @@
+{{$basePath := "/dns/services"}}
+
+{{$tld := "local"}}
+{{if exists "/dns/domain"}}
+{{$tld := getv "/dns/domain"}}
+domain={{$tld}}
+{{end}}
+
+local=/local/
+
+keep-in-foreground
+domain-needed
+bogus-priv
+no-resolv
+
+{{range lsdir $basePath}}
+{{$svc := .}}
+{{$subkey := printf "%s/%s/host" $basePath $svc}}
+{{with get $subkey}}
+address=/{{$svc}}.{{$tld}}/{{.Value}}
+{{end}}
+
+{{if exists (printf "%s/%s/port/udp" $basePath $svc)}}
+{{with get (printf "%s/%s/port/udp" $basePath $svc)}}
+srv-host=_{{$svc}}._udp.{{$tld}},{{$svc}}.{{$tld}},{{.Value}}
+{{end}}
+{{end}}
+
+{{if exists (printf "%s/%s/port/tcp" $basePath $svc)}}
+{{with get (printf "%s/%s/port/tcp" $basePath $svc)}}
+srv-host=_{{$svc}}._tcp.{{$tld}},{{$svc}}.{{$tld}},{{.Value}}
+{{end}}
+{{end}}
+
+{{end}}
+
