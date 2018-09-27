@@ -4,9 +4,9 @@ Requires=rocknsm-metadata.service
 After=rocknsm-metadata.service
 
 [Service]
-Type=oneshot
+Type=simple
 EnvironmentFile=/run/metadata/environ
-ExecStart=/usr/bin/confd -onetime -backend env
+ExecStart=/usr/bin/confd -backend etcd -node ${ETCD_LISTEN_CLIENT_URL}
 RemainAfterExit=true
 StandardOutput=journal
 
