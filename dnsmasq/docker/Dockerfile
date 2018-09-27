@@ -3,7 +3,7 @@
 FROM quay.io/rocknsm/base:latest
 MAINTAINER Derek Ditch <derek@rocknsm.io>
 
-LABEL io.rocknsm.dnsmasq="2.79-20180927.1"
+LABEL io.rocknsm.dnsmasq="2.79-20180927.2"
 
 # Prepare the environment and get things up to date
 RUN yum install -y --setopt=tsflags=nodocs dnsmasq; \
