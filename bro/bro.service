@@ -1,0 +1,13 @@
+[Unit]
+Description=Bro Network Intrusion Detection System (NIDS)
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bro-2.6.1/bin/broctl deploy
+ExecStop=/usr/local/bro-2.6.1/bin/broctl stop
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
