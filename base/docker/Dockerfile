@@ -8,7 +8,7 @@ STOPSIGNAL SIGRTMIN+3
 
 ENV ETCD_LISTEN_CLIENT_URL="http://etcd:2379"
 
-COPY rocknsm-2.1.repo /etc/yum.repos.d/rocknsm-2.1.repo
+COPY rocknsm-testing.repo /etc/yum.repos.d/rocknsm-testing.repo
 
 # Add confd as a standard way to render configs
 RUN yum -y install --setopt=tsflags=nodocs epel-release; \
