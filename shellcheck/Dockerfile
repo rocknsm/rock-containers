@@ -2,6 +2,6 @@
 FROM fedora:30 AS build
 
 RUN dnf install -y --setopt=tsflags=nodocs \
-  findutils ShellCheck && \
+  findutils ShellCheck file grep && \
   dnf clean all && \
   rm -rf /var/cache/dnf 
