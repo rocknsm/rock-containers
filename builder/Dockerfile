@@ -11,3 +11,4 @@ RUN git config --system user.name  "ROCK Lobster"
 RUN git config --system commit.gpgsign true
 
 ENV LANG=C.utf8
+WORKDIR /build
